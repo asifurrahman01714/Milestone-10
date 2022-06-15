@@ -21,8 +21,17 @@ const users = [
     {name:"rhidwan", roll:13}
 ]
 app.get('/users/:id',(req,res)=>{
-    console.log(req.params);
-    res.send(req.params.id)
+    const rollNumber = req.params.id;
+    for (let i = 0; i < users.length; i++) {
+        const element = users[i];
+        const elementRoll = element.roll;
+        if (elementRoll == rollNumber) {
+            res.send(element);
+        }
+    }
+})
+app.get("/users",(req, res)=>{
+    res.send(users);
 })
   
 app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
