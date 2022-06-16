@@ -1,6 +1,9 @@
 // Creating a express function
 const express = require('express')
 const app = express()
+var cors = require('cors')
+app.use(cors())
+
 
 app.get('/', function (req, res) {
     const fruit = {
@@ -16,9 +19,9 @@ app.get('/fruits/banana', (req, res)=>{
 
 const users = [
     {name:"Asif", roll:10},
-    {name:"sakib", roll:11},
-    {name:"azad", roll:12},
-    {name:"rhidwan", roll:13}
+    {name:"tamanna", roll:11},
+    {name:"ahmad", roll:12},
+    {name:"sakib", roll:13}
 ]
 app.get('/users/:id',(req,res)=>{
     const rollNumber = req.params.id;
