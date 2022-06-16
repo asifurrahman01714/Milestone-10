@@ -13,10 +13,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-3">
-                <form action="http://localhost:3000/addUser" method="POST">
-                    <input type="text" class="form-control" id="user"> <br>
-                    <button class="btn btn-primary" id="addUser">Send Data</button>
-                </form>
+                <input type="text" class="form-control" id="user"> <br>
+                <button class="btn btn-primary" id="addUser">Send Data</button>
             </div>
         </div>
     </div>
@@ -42,8 +40,8 @@
         const addUser = document.getElementById("addUser");
         addUser.addEventListener('click',()=>{
             const userName = user.value;
-            console.log(userName);
-
+            const newUser = {userName}
+            console.log(newUser);
         })
     }
     postData();
