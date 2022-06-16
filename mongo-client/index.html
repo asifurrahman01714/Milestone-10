@@ -10,9 +10,12 @@
 <body>
     <h1>My node and mongo db site</h1>
     <ul id="userName"></ul>
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-3">
+                
+                <h1 id="addNewUser"></h1> <br>
                 <input type="text" class="form-control" id="user"> <br>
                 <button class="btn btn-primary" id="addUser">Send Data</button>
             </div>
@@ -59,7 +62,12 @@
         },
         })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            console.log('Post Done');
+            console.log(data.userName);
+            let addNewUser = document.getElementById('addNewUser');
+            addNewUser.innerText = data.userName;
+        });
     }
 </script>
 </body>
