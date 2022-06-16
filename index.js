@@ -1,9 +1,12 @@
 // Creating a express function
 const express = require('express')
 const app = express()
-var cors = require('cors')
-app.use(cors())
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
+app.use(cors())
+// parse application/json
+app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
     const fruit = {
@@ -19,7 +22,7 @@ app.get('/fruits/banana', (req, res)=>{
 
 const users = [
     {name:"Asif", roll:10},
-    {name:"tamanna", roll:11},
+    {name:"Arif", roll:11},
     {name:"ahmad", roll:12},
     {name:"sakib", roll:13}
 ]
@@ -29,12 +32,18 @@ app.get('/users/:id',(req,res)=>{
         const element = users[i];
         const elementRoll = element.roll;
         if (elementRoll == rollNumber) {
+            console.log(element);
             res.send(element);
         }
     }
 })
 app.get("/users",(req, res)=>{
     res.send(users);
+})
+
+// Post method
+app.post("/addUser", (req, res)=>{
+    res.send("Recieved post request. You can now post your post");
 })
   
 app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
