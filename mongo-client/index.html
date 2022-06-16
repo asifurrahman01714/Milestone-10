@@ -42,9 +42,25 @@
             const userName = user.value;
             const newUser = {userName}
             console.log(newUser);
+
+
+            // Post data
+            postMethod(newUser);
         })
     }
     postData();
+
+    const postMethod = (newUser)=>{
+        fetch('http://localhost:3000/addUser', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
 </script>
 </body>
 </html>
