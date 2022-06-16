@@ -7,7 +7,6 @@ const bodyParser = require('body-parser')
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
-
 app.get('/', function (req, res) {
     const fruit = {
         product:'Banana',
@@ -43,7 +42,8 @@ app.get("/users",(req, res)=>{
 
 // Post method
 app.post("/addUser", (req, res)=>{
-    res.send("Recieved post request. You can now post your post");
+    console.log(req.body)
+    res.send(JSON.stringify(req.body));
 })
   
 app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
