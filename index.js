@@ -9,7 +9,9 @@ app.use(bodyParser.json())
 
 
 
-
+app.get("/addProduct",(req,res)=>{
+    res.sendFile(__dirname + "/index.html");
+})
 
 // MongoDb connection
 const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
@@ -20,17 +22,6 @@ const databaseName = 'nodeMongoBasicDatabase';
 const collectionName = "nodeMongoBasicDatabasProducts";
 client.connect(err => {
   const collection = client.db(databaseName).collection(collectionName);
-  // perform actions on the collection object
-  const products = [
-    {name: "Halley's Comet", officialName: "1P/Halley", orbitalPeriod: 75, radius: 3.4175, mass: 2.2e14},
-    {name: "Wild2", officialName: "81P/Wild", orbitalPeriod: 6.41, radius: 1.5534, mass: 2.3e13},
-    {name: "Comet Hyakutake", officialName: "C/1996 B2", orbitalPeriod: 17000, radius: 0.77671, mass: 8.8e12}
-  ];
-
-  collection.insertMany(products)
-  .then(result=>{
-    console.log("All Products Added")
-  });
   console.log("database connected")
 });
 
