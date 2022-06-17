@@ -22,16 +22,26 @@ const databaseName = 'nodeMongoBasicDatabase';
 const collectionName = "nodeMongoBasicDatabasProducts";
 client.connect(err => {
   const collection = client.db(databaseName).collection(collectionName);
+
+  // Add Product to MongoDB
   app.post("/addProduct", (req, res)=>{
     const product = req.body;
     collection.insertOne(product);
     console.log(product);
     res.send(product);
   })
+
+  // Retrieved Product from MongoDB
+  app.get("/products", (req, res) =>{
+    collection.find({})
+    .toArray((err, documents) =>{
+        res.send(documents)
+    })
+  })
+    
+
   console.log("database connected")
 });
-
-
 
 app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
 
