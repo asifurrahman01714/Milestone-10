@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/addProduct",(req,res)=>{
@@ -22,6 +22,11 @@ const databaseName = 'nodeMongoBasicDatabase';
 const collectionName = "nodeMongoBasicDatabasProducts";
 client.connect(err => {
   const collection = client.db(databaseName).collection(collectionName);
+  app.post("/addProduct", (req, res)=>{
+    const product = req.body;
+    console.log(product);
+    res.send(product);
+  })
   console.log("database connected")
 });
 
