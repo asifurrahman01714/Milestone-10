@@ -24,6 +24,7 @@ client.connect(err => {
   const collection = client.db(databaseName).collection(collectionName);
   app.post("/addProduct", (req, res)=>{
     const product = req.body;
+    collection.insertOne(product);
     console.log(product);
     res.send(product);
   })
