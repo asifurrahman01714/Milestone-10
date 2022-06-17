@@ -48,5 +48,23 @@ app.post("/addUser", (req, res)=>{
     console.log(user)
     res.send(user);
 })
+
+
+/** Show page with a form */
+app.use(express.urlencoded());
+app.get('/sendFormToServer', (req, res, next) => {
+    res.send(`
+    <form method="POST" action="/sendFormToServer">
+        <input type="text" name="username" placeholder="username"></br></br>
+        <input type="submit">
+    </form>`
+  );
+});
+
+app.post('/sendFormToServer', function (req, res, next) {
+    console.log(req.body)
+    res.send(JSON.stringify(req.body));
+});
   
+
 app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
