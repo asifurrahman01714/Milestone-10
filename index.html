@@ -21,5 +21,22 @@
             </div>
         </div>
     </div>
+
+    <div id="products">
+
+    </div>
+<script>
+    fetch('http://localhost:3000/products')
+    .then(res => res.json())
+    .then(data =>{
+        console.log(data);
+        const productContainer = document.getElementById('products')
+        data.forEach(pd => {
+            const li = document.createElement('li')
+            li.innerHTML = `<strong>Name: </strong> ${pd.product}`
+            productContainer.appendChild(li);
+        });
+    })
+</script>
 </body>
 </html>
