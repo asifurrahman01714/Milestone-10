@@ -3,10 +3,33 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
+
+
+
+
+
+// MongoDb connection
+const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://nodeMongoBasic:<password>@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+
+app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
+
+
+
+
+/*
 app.get('/', function (req, res) {
     const fruit = {
         product:'Banana',
@@ -50,7 +73,7 @@ app.post("/addUser", (req, res)=>{
 })
 
 
-/** Show page with a form */
+//Show page with a form 
 app.use(express.urlencoded());
 app.get('/sendFormToServer', (req, res, next) => {
     res.send(`
@@ -65,6 +88,5 @@ app.post('/sendFormToServer', function (req, res, next) {
     console.log(req.body)
     res.send(JSON.stringify(req.body));
 });
-  
 
-app.listen(3000, ()=> console.log("Yay! Listening to port 3000"))
+*/
