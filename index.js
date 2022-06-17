@@ -14,11 +14,18 @@ app.use(bodyParser.json())
 // MongoDb connection
 const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://nodeMongoBasic:wLLj-UL-LrC7LES@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://nodeMongoBasic:"+mongoDbUserPassword+"wLLj-UL-LrC7LES@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const databaseName = 'nodeMongoBasicDatabase';
+const collectionName = "nodeMongoBasicDatabasProducts";
 client.connect(err => {
-  const collection = client.db("test").collection("devices");
+  const collection = client.db(databaseName).collection(collectionName);
   // perform actions on the collection object
+  if (collection) {
+    console.log("mongodb database is connected");
+  } else {
+    console.log("mongodb database is not connected");
+  }
   client.close();
 });
 
