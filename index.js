@@ -14,19 +14,24 @@ app.use(bodyParser.json())
 // MongoDb connection
 const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://nodeMongoBasic:"+mongoDbUserPassword+"wLLj-UL-LrC7LES@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://nodeMongoBasic:"+mongoDbUserPassword+"@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 const databaseName = 'nodeMongoBasicDatabase';
 const collectionName = "nodeMongoBasicDatabasProducts";
 client.connect(err => {
   const collection = client.db(databaseName).collection(collectionName);
   // perform actions on the collection object
-  if (collection) {
-    console.log("mongodb database is connected");
-  } else {
-    console.log("mongodb database is not connected");
-  }
-  client.close();
+  const products = [
+    {name: "Halley's Comet", officialName: "1P/Halley", orbitalPeriod: 75, radius: 3.4175, mass: 2.2e14},
+    {name: "Wild2", officialName: "81P/Wild", orbitalPeriod: 6.41, radius: 1.5534, mass: 2.3e13},
+    {name: "Comet Hyakutake", officialName: "C/1996 B2", orbitalPeriod: 17000, radius: 0.77671, mass: 8.8e12}
+  ];
+
+  collection.insertMany(products)
+  .then(result=>{
+    console.log("All Products Added")
+  });
+  console.log("database connected")
 });
 
 
