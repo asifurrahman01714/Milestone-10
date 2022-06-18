@@ -50,7 +50,7 @@ client.connect(err => {
     .then(result =>{
         console.log(result);
         res.send(result) // this response will not work for delete
-        
+        res.redirect('/addProduct') // redirect korle then show korbe
     })
   })
 
