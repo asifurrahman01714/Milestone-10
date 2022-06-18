@@ -72,15 +72,19 @@
             const updateContainer = document.getElementById("update")
             updateContainer.innerHTML = `
             <h4> <strong>Name: </strong> ${data._id} </h4>
-            <input type="text" value="${data.price}" /> 
-            <input type="text" value="${data.quantity}" /> 
+            <input type="text" value="${data.price}" id="price"/> 
+            <input type="text" value="${data.quantity}" id="quantity"/> 
             <button class="btn btn-success" onclick="updateProduct('${data._id}')">Submit</button>
             `;
         })
     }
 
     const updateProduct = (id) =>{
-        console.log("Product submitted",id)
+        console.log("Product submitted",id);
+        const price = document.getElementById('price').value;
+        const quantity = document.getElementById('quantity').value;
+        const product = {id, price, quantity};
+        console.log(product)
     }
 </script>
 </body>
