@@ -49,8 +49,7 @@ client.connect(err => {
     collection.deleteOne({_id : ObjectId(req.params.id)})
     .then(result =>{
         console.log(result);
-        res.send(result) // this response will not work for delete
-        res.redirect('/addProduct') // redirect korle then show korbe
+        res.send(result.deletedCount > 0) // this response will not work for delete
     })
   })
 
@@ -73,6 +72,7 @@ client.connect(err => {
      )
      .then(result =>{
         console.log(result);
+        res.send(result.modifiedCount > 0)
      })
   })
 

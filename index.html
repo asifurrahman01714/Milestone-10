@@ -30,33 +30,40 @@
 
     </div>
 <script>
-    fetch('http://localhost:3000/products')
-    .then(res => res.json())
-    .then(data =>{
-        console.log(data);
-        const productContainer = document.getElementById('products')
-        data.forEach(pd => {
-            const li = document.createElement('li')
-            li.innerHTML = `
-            <strong>Name: </strong> ${pd.product} 
-            Price: ${pd.price} 
-            Quantity:${pd.quantity}
-            <button class="btn btn-primary" onclick="loadProduct('${pd._id}')">Update</button>
-            <button class="btn btn-danger" onclick="deleteItem('${pd._id}')">Delete</button>
-            `;
-            li.classList="mb-5"
-            productContainer.appendChild(li);
-        });
-    })
+    const loadAllProducts = () =>{
+        fetch('http://localhost:3000/products')
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+            const productContainer = document.getElementById('products');
+            productContainer.innerHTML = "";
+            data.forEach(pd => {
+                const li = document.createElement('li')
+                li.innerHTML = `
+                <strong>Name: </strong> ${pd.product} 
+                Price: ${pd.price} 
+                Quantity:${pd.quantity}
+                <button class="btn btn-primary" onclick="loadProduct('${pd._id}')">Update</button>
+                <button class="btn btn-danger" onclick="deleteItem(event,'${pd._id}')">Delete</button>
+                `;
+                li.classList="mb-5"
+                productContainer.appendChild(li);
+            });
+        })
+    }
 
-    const deleteItem =(id)=>{
-        console.log(id);
+    loadAllProducts();
+    const deleteItem =(event,id)=>{
+        console.log(event.target);
         fetch(`http://localhost:3000/deleteProduct/${id}`, {
             method: 'DELETE',
         })
         .then(res => res.json())
         .then(result =>{
-            console.log('deleted successfully')
+            console.log('deleted successfully');
+            if(result){
+                event.target.parentNode.style.display = "none";
+            }
         })
     }
 
@@ -98,8 +105,11 @@
             },
             })
             .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
+            .then((result) => {
+                console.log(result);
+                if (result) {
+                    loadAllProducts();
+                }
             });
     }
 </script>
