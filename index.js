@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { ObjectId } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 
 
 
@@ -46,9 +46,13 @@ client.connect(err => {
   // Deleting Item
   app.delete("/deleteProduct/:id", (req, res)=>{
     console.log(req.params.id);
+    collection.deleteOne({_id : ObjectId(req.params.id)})
+    .then(result =>{
+        console.log(result);
+    })
   })
 
-  
+
   console.log("database connected")
 });
 
