@@ -17,6 +17,7 @@
                     <input type="text" name="price" placeholder="Price"></br></br>
                     <input type="text" name="quantity" placeholder="Quantity"></br></br>
                     <input type="submit">
+                    
                 </form>
             </div>
         </div>
@@ -33,7 +34,13 @@
         const productContainer = document.getElementById('products')
         data.forEach(pd => {
             const li = document.createElement('li')
-            li.innerHTML = `<strong>Name: </strong> ${pd.product}`
+            li.innerHTML = `
+            <strong>Name: </strong> ${pd.product} 
+            Price: ${pd.price} 
+            Quantity:${pd.quantity}
+            <button class="btn btn-danger">Delete</button>
+            `;
+            li.classList="mb-5"
             productContainer.appendChild(li);
         });
     })
