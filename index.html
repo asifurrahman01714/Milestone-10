@@ -84,7 +84,21 @@
         const price = document.getElementById('price').value;
         const quantity = document.getElementById('quantity').value;
         const product = {id, price, quantity};
-        console.log(product)
+        console.log(product);
+
+
+        // fetch the updated product
+        fetch(`/updateProduct/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(product),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
     }
 </script>
 </body>

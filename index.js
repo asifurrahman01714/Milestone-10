@@ -62,6 +62,18 @@ client.connect(err => {
     })
   })
 
+  app.patch('/updateProduct/:id',(req,res)=>{
+    console.log(req.body);
+    console.log(req.params.id);
+    collection.updateOne(
+        { _id: ObjectId(req.params.id) },
+        { $set: { price :req.body.price, quantity : req.body.quantity } }
+     )
+     .then(result =>{
+        console.log(result);
+     })
+  })
+
 
   console.log("database connected")
 });
