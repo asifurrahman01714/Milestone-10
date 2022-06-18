@@ -32,7 +32,7 @@ client.connect(err => {
     const product = req.body;
     collection.insertOne(product);
     console.log(product);
-    res.send(product);
+    res.redirect("/addProduct");
   })
 
   // Retrieved Product from MongoDB
@@ -49,6 +49,8 @@ client.connect(err => {
     collection.deleteOne({_id : ObjectId(req.params.id)})
     .then(result =>{
         console.log(result);
+        res.send(result) // this response will not work for delete
+        
     })
   })
 
