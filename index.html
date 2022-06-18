@@ -38,12 +38,25 @@
             <strong>Name: </strong> ${pd.product} 
             Price: ${pd.price} 
             Quantity:${pd.quantity}
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" onclick="deleteItem('${pd._id}')">Delete</button>
             `;
             li.classList="mb-5"
             productContainer.appendChild(li);
         });
     })
+
+    const deleteItem =(id)=>{
+        console.log(id);
+        fetch(`/deleteProduct/${id}`, {
+            method: 'DELETE',
+        })
+        .then(res => res.json())
+        .then(result =>{
+            console.log('deleted successfully')
+        })
+    }
+
+
 </script>
 </body>
 </html>
