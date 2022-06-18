@@ -90,6 +90,9 @@
         // fetch the updated product
         fetch(`/updateProduct/${id}`, {
             method: 'PATCH',
+            // (product) vs ({product}) where product ={name:"kodhu"}
+            // (product) = {name:"kodhu"}
+            // ({product}) = {product: {name:kodhu}}
             body: JSON.stringify(product),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
