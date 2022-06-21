@@ -1,31 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import './Header.css';
+import header from '../../images/header.png';
+import logo from '../../images/icons/logo.png';
 
 const Header = () => {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand fw-bold" href="#">SOCIAL BUDDY</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <Link class="nav-link active fw-bold" aria-current="page" to="/home">Home</Link>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <Link class="nav-link active fw-bold" aria-current="page" to="/dashboard">Dashboard</Link>
-                        </li>
-
-                        <li class="nav-item">
-                            <Link class="nav-link active fw-bold" aria-current="page" to="/login">Login</Link>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
+        <div style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${header})` }} className="header">
+            <nav className="nav">
+                <ul>
+                    <li>
+                        <img className="logo" src={logo} alt=""/>
+                    </li>
+                    <li>
+                        <Link to="/home">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                    <li>
+                        <Link className="btn-book" to="/book">Book</Link>
+                    </li>
+                </ul>
             </nav>
+            <div className="title-container">
+                <h1>Burj Al Arab</h1>
+                <h2>A global icon of Arabian luxury</h2>
+            </div>
+        </div>
     );
 };
 
