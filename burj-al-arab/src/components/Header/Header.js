@@ -7,7 +7,7 @@ import logo from '../../images/icons/logo.png';
 const Header = () => {
     return (
         <div style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${header})` }} className="header">
-            <nav className="nav">
+            <nav className="nav ">
                 <ul>
                     <li>
                         <img className="logo" src={logo} alt=""/>
