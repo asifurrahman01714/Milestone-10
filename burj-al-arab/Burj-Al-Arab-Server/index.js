@@ -13,17 +13,20 @@ app.use(bodyParser.urlencoded({ extended: true })); // for file
 
 // MongoDB connection
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const password='7SrtDXhC3167hiT5';
-const uri = "mongodb+srv://nodeMongoBasic:"+password+"@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
+const uri = "mongodb+srv://nodeMongoBasic:"+mongoDbUserPassword+"@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
   const collection = client.db("burjAlArabHotel").collection("bookings");
   console.log('database connected');
-
   // Post data
-  app.post('/addBooking', (req,res) =>{
-    console.log(req.body);
+  app.post("/addBooking", (req, res)=>{
+    const booking = req.body;
+    collection.insertOne(booking);
+    console.log(booking);
+    res.send(booking);
   })
+
 });
 
 
