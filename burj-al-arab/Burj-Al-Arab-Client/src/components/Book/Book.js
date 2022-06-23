@@ -11,11 +11,14 @@ import { UserContext } from '../../App';
 const Book = () => {
     const {bedType} = useParams();
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [value, setValue] = React.useState([new Date(), new Date()]);
-    console.log(value);
+    const [value, setValue] = React.useState([null, null]);
     const handleBooking = () =>{
+        const checkIn = value[0].toLocaleDateString('en-GB');
+        const checkOut = value[1].toLocaleDateString('en-GB');
+        const newDateFormate = {checkIn,checkOut};
+        console.log(newDateFormate);
         const {name, email} = loggedInUser;
-        const booking = {name,email,...value};
+        const booking = {name,email,...newDateFormate};
         console.log(booking);
     }
     return (
