@@ -23,8 +23,9 @@ const Book = () => {
     }
     return (
         
-            <div>
+            <div className=''>
                 <h4 className='text-center mt-5 mb-5 fw-bold'>Book this {bedType} room</h4>
+                <div className='d-flex justify-content-center mb-5'>
                 <LocalizationProvider
                     dateAdapter={AdapterDateFns}
                     localeText={{ start: 'Check-in', end: 'Check-out' }}
@@ -42,8 +43,9 @@ const Book = () => {
                         </React.Fragment>
                         )}
                     />
-                    <Button className="mt-5" variant="contained" onClick={handleBooking}>Book Now</Button>
                 </LocalizationProvider>
+                <Button className="mt-5" variant="contained" onClick={handleBooking}>Book Now</Button>
+                </div>
             </div>
        
     );
