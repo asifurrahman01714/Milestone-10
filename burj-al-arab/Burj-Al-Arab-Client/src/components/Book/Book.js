@@ -20,6 +20,19 @@ const Book = () => {
         const {name, email} = loggedInUser;
         const booking = {name,email,...newDateFormate};
         console.log(booking);
+        postBooking(booking)
+    }
+
+    const postBooking = (booking) =>{
+        fetch('http://localhost:5000/addBooking', {
+        method: 'POST',
+        body: JSON.stringify(booking),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     }
     return (
         

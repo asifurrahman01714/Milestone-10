@@ -11,6 +11,22 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // for file
 
+// MongoDB connection
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const password='7SrtDXhC3167hiT5';
+const uri = "mongodb+srv://nodeMongoBasic:"+password+"@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("burjAlArabHotel").collection("bookings");
+  console.log('database connected');
+
+  // Post data
+  app.post('/addBooking', (req,res) =>{
+    console.log(req.body);
+  })
+});
+
+
 app.get("/", (req,res)=>{
     console.log("Requesting anyone");
     res.send("Hi! I have got response")
