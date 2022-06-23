@@ -34,6 +34,16 @@ const Book = () => {
         .then((response) => response.json())
         .then((json) => console.log(json));
     }
+
+    const [bookings,setBookings] = useState([]);
+    const showBookings = () =>{
+        fetch('http://localhost:5000/bookings')
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+            setBookings(data)
+        })
+    }
     return (
         
             <div className=''>
@@ -59,6 +69,10 @@ const Book = () => {
                 </LocalizationProvider>
                 <Button className="mt-5" variant="contained" onClick={handleBooking}>Book Now</Button>
                 </div>
+                <button className='primary mb-3' onClick={showBookings}>Show Your Bookings</button>
+                {
+                    bookings.map(booking => <ol><li>{booking.name} : {booking.checkIn} to {booking.checkOut}</li></ol>)
+                }
             </div>
        
     );
