@@ -37,7 +37,7 @@ const Book = () => {
 
     const [bookings,setBookings] = useState([]);
     const showBookings = () =>{
-        fetch('http://localhost:5000/bookings')
+        fetch('http://localhost:5000/bookings?email='+loggedInUser.email)
         .then(res => res.json())
         .then(data =>{
             console.log(data);
@@ -70,9 +70,11 @@ const Book = () => {
                 <Button className="mt-5" variant="contained" onClick={handleBooking}>Book Now</Button>
                 </div>
                 <button className='primary mb-3' onClick={showBookings}>Show Your Bookings</button>
+                <ol>
                 {
-                    bookings.map(booking => <ol><li>{booking.name} : {booking.checkIn} to {booking.checkOut}</li></ol>)
+                    bookings.map(booking => <li>{booking.name} : {booking.checkIn} to {booking.checkOut}</li>)
                 }
+                </ol>
             </div>
        
     );
