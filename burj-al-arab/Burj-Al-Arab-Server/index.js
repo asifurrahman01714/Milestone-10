@@ -30,7 +30,7 @@ client.connect(err => {
   // Get Data
   app.get("/bookings",(req, res)=>{
     console.log(req.query.email);
-    collection.find({})
+    collection.find({email : req.query.email})
     .toArray((err, documents)=>{
         res.send(documents)
     })
