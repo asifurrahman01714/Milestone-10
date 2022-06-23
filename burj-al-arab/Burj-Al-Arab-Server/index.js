@@ -25,6 +25,14 @@ client.connect(err => {
     collection.insertOne(booking);
     console.log(booking);
     res.send(booking);
+  });
+
+  // Get Data
+  app.get("/bookings",(req, res)=>{
+    collection.find({})
+    .toArray((err, documents)=>{
+        res.send(documents)
+    })
   })
 
 });
