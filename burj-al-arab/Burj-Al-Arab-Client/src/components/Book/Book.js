@@ -11,24 +11,27 @@ const Book = () => {
     const [value, setValue] = React.useState([null, null]);
     return (
         
-            <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                localeText={{ start: 'Check-in', end: 'Check-out' }}
-                >
-                <DateRangePicker
-                    value={value}
-                    onChange={(newValue) => {
-                    setValue(newValue);
-                    }}
-                    renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                        <TextField {...startProps} />
-                        <Box sx={{ mx: 2 }}> to </Box>
-                        <TextField {...endProps} />
-                    </React.Fragment>
-                    )}
-                />
-            </LocalizationProvider>
+            <div>
+                <h4 className='text-center mt-5 mb-5 fw-bold'>Book this {bedType} room</h4>
+                <LocalizationProvider
+                    dateAdapter={AdapterDateFns}
+                    localeText={{ start: 'Check-in', end: 'Check-out' }}
+                    >
+                    <DateRangePicker
+                        value={value}
+                        onChange={(newValue) => {
+                        setValue(newValue);
+                        }}
+                        renderInput={(startProps, endProps) => (
+                        <React.Fragment>
+                            <TextField {...startProps} />
+                            <Box sx={{ mx: 2 }}> to </Box>
+                            <TextField {...endProps} />
+                        </React.Fragment>
+                        )}
+                    />
+                </LocalizationProvider>
+            </div>
        
     );
 };
