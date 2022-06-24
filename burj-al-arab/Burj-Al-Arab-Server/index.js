@@ -49,16 +49,26 @@ client.connect(err => {
         .verifyIdToken(idToken)
         .then((decodedToken) => {
         const uid = decodedToken.uid;
+        const decodedEmail = decodedToken.email;
+        const queryEmail = req.query.email;
         console.log({uid});
+        if (decodedEmail == queryEmail) {
+            collection.find({email : queryEmail})
+            .toArray((err, documents)=>{
+                res.send(documents)
+            })
+        }else{
+            res.status(401).send("Un- authorized User")
+        }
+        
         })
         .catch((error) => {
         // Handle error
         });
+    }else{
+        res.status(401).send("Un- authorized User")
     }
-    collection.find({email : req.query.email})
-    .toArray((err, documents)=>{
-        res.send(documents)
-    })
+    
   })
 
 });
