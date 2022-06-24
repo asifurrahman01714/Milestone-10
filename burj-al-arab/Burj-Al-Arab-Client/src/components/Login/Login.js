@@ -6,6 +6,7 @@ import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
 
 
+
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const app = initializeApp(firebaseConfig);
@@ -25,18 +26,27 @@ const Login = () => {
     const handleSignIn = () => {
         signInWithPopup(auth, provider)
         .then((result) => {
-        const {email, photoURL,displayName} = result.user;
-        const newUser = {
-            isSignedIn: true,
-            name: displayName,
-            email: email,
-            photo: photoURL,
-        }
-        setUser(newUser);
-        setLoggedInUser(newUser);
-        history.replace(from);
+            const {email, photoURL,displayName} = result.user;
+            const newUser = {
+                isSignedIn: true,
+                name: displayName,
+                email: email,
+                photo: photoURL,
+            }
+            setUser(newUser);
+            setLoggedInUser(newUser);
+            storeAuthToken();
+            history.replace(from);
         })
     };
+    const storeAuthToken = () =>{
+        getAuth.currentUser.getIdToken(true)
+        .then(function(idToken) {
+            console.log(idToken)
+          }).catch(function(error) {
+            // Handle error
+          });
+    }
     return (
         <div>
             <h1>This is Login</h1>
