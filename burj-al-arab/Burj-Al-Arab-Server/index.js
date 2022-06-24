@@ -7,6 +7,14 @@ const ObjectId = require('mongodb').ObjectId;
 require('dotenv').config();
 console.log(process.env.DB_PASS,process.env.DB_USER)
 
+// firebase admin set up for verify idToken
+const admin = require("firebase-admin");
+const serviceAccount = require("./burj-al-arab-bafe3-firebase-adminsdk-q5wtu-5b0a97a05d.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
@@ -32,6 +40,7 @@ client.connect(err => {
   // Get Data
   app.get("/bookings",(req, res)=>{
     console.log(req.query.email);
+    console.log(req.headers.authorization);
     collection.find({email : req.query.email})
     .toArray((err, documents)=>{
         res.send(documents)

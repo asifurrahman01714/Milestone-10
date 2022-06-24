@@ -37,7 +37,14 @@ const Book = () => {
 
     const [bookings,setBookings] = useState([]);
     const showBookings = () =>{
-        fetch('http://localhost:5000/bookings?email='+loggedInUser.email)
+        fetch('http://localhost:5000/bookings?email='+loggedInUser.email,{
+            method:"GET",
+            headers: {
+                'authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
         .then(res => res.json())
         .then(data =>{
             console.log(data);
