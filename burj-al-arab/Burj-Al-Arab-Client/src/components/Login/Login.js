@@ -42,7 +42,8 @@ const Login = () => {
     const storeAuthToken = () =>{
         auth.currentUser.getIdToken(true)
         .then(function(idToken) {
-            console.log({idToken})
+            console.log({idToken});
+            sessionStorage.setItem('token', idToken);
           }).catch(function(error) {
             // Handle error
           });
