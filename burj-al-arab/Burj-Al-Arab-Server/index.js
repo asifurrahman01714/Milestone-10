@@ -4,7 +4,8 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const ObjectId = require('mongodb').ObjectId;
-
+require('dotenv').config();
+console.log(process.env.DB_PASS,process.env.DB_USER)
 
 app.use(cors())
 // parse application/json
@@ -13,8 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // for file
 
 // MongoDB connection
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const mongoDbUserPassword = 'wLLj-UL-LrC7LES';
-const uri = "mongodb+srv://nodeMongoBasic:"+mongoDbUserPassword+"@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority";
+const mongoDbUserPassword = process.env.DB_PASS;
+const mongoDbUser = process.env.DB_USER;
+const uri = `mongodb+srv://${mongoDbUser}:${mongoDbUserPassword}@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
   const collection = client.db("burjAlArabHotel").collection("bookings");
