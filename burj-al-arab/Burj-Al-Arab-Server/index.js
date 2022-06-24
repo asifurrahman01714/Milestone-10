@@ -14,7 +14,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
@@ -41,6 +40,21 @@ client.connect(err => {
   app.get("/bookings",(req, res)=>{
     console.log(req.query.email);
     console.log(req.headers.authorization);
+    const bearer = req.headers.authorization;
+    if (bearer && bearer.startsWith('Bearer ')) {
+        const idToken = bearer.split(' ')[1];
+        console.log({idToken});
+        // idToken comes from the client app
+        admin.auth()
+        .verifyIdToken(idToken)
+        .then((decodedToken) => {
+        const uid = decodedToken.uid;
+        console.log({uid});
+        })
+        .catch((error) => {
+        // Handle error
+        });
+    }
     collection.find({email : req.query.email})
     .toArray((err, documents)=>{
         res.send(documents)
