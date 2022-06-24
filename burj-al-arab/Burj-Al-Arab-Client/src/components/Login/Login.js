@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react';
+import firebase from "firebase/app";
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from './firebaseConfig';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from'firebase/auth';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
 
-
-
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const app = initializeApp(firebaseConfig);
+    // const auth = getAuth(app);
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
     const [user, setUser] = useState({
@@ -40,9 +40,9 @@ const Login = () => {
         })
     };
     const storeAuthToken = () =>{
-        getAuth.currentUser.getIdToken(true)
+        auth.currentUser.getIdToken(true)
         .then(function(idToken) {
-            console.log(idToken)
+            console.log({idToken})
           }).catch(function(error) {
             // Handle error
           });
