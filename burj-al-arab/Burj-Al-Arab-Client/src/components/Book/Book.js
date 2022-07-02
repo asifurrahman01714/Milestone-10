@@ -24,7 +24,7 @@ const Book = () => {
     }
 
     const postBooking = (booking) =>{
-        fetch('http://localhost:5000/addBooking', {
+        fetch('https://multicultural-minister-49788.herokuapp.com/addBooking', {
         method: 'POST',
         body: JSON.stringify(booking),
         headers: {
@@ -37,7 +37,7 @@ const Book = () => {
 
     const [bookings,setBookings] = useState([]);
     const showBookings = () =>{
-        fetch('http://localhost:5000/bookings?email='+loggedInUser.email,{
+        fetch('https://multicultural-minister-49788.herokuapp.com/bookings?email='+loggedInUser.email,{
             method:"GET",
             headers: {
                 'authorization': `Bearer ${sessionStorage.getItem('token')}`,
